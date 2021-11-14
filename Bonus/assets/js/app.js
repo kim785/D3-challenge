@@ -89,18 +89,18 @@ function renderText(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis
     return circlesGroup;
 }
 
-// function used for updating circles
+// function for updating circles
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
     var xlabel;
 
     if (chosenXAxis === "poverty") {
-        xlabel = "In Poverty (%)";
+        xlabel = "Poverty (%)";
     }
     else if (chosenXAxis === "age") {
-        xlabel = "Age (Median)";
+        xlabel = "Age";
     }
     else {
-        xlabel = "Income (Median)";
+        xlabel = "Income ($)";
     }
 
     var ylabel;
@@ -112,14 +112,14 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
         ylabel = "Smokes (%)";
     }
     else {
-        ylabel = "Lacks Healthcare (%)";
+        ylabel = "Healthcare (%)";
     }
 
     var toolTip = d3.tip()
         .attr("class", "d3-tip")
-        .offset([80, -60])
+        .offset([90,-90])
         .html(function(d) {
-            return(`${d.abbr}`);
+            return(`${d.state}<br>${xlabel}: ${d[chosenXAxis]}<br>${ylabel}: ${d[chosenYAxis]}`);
         });
     circlesGroup.call(toolTip);
 
